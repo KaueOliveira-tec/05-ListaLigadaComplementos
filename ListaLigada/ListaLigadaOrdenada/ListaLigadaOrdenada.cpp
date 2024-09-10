@@ -124,19 +124,18 @@ void inserirElemento()
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
-
+	NO* ordem = NULL;
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
 	}
-	else
+	else if (novo->valor < primeiro->valor)
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
-		aux->prox = novo;
+		novo->prox = primeiro;
+		primeiro = novo;
+	}
+	else {
+
 	}
 }
 
