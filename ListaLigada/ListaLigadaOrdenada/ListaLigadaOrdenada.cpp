@@ -124,8 +124,23 @@ void inserirElemento()
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
-	NO* ordem = NULL;
-	if (primeiro == NULL)
+	NO* aux = primeiro;
+	bool elementoRep = false;
+
+	while (aux != NULL) {
+		if (aux->valor == novo->valor) {
+			elementoRep = true;
+			break;
+		}
+		aux = aux->prox;
+	}
+
+	if (elementoRep) {
+		free(novo);
+		cout << "Este elemento ja existe na lista, digite outro \n" << endl;
+	}
+	else {
+		if (primeiro == NULL)
 	{
 		primeiro = novo;
 	}
@@ -135,8 +150,14 @@ void inserirElemento()
 		primeiro = novo;
 	}
 	else {
-
+		while (aux->prox != NULL && aux->prox->valor < novo->valor) {
+			aux = aux->prox;
+		}
+		novo->prox = aux->prox;
+		aux->prox = novo;
 	}
+	}
+	
 }
 
 void excluirElemento()
