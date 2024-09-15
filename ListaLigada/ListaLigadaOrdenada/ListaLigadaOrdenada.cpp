@@ -130,44 +130,92 @@ void inserirElemento()
 	while (aux != NULL) {
 		if (aux->valor == novo->valor) {
 			elementoRep = true;
-			break;
+			return;
 		}
 		aux = aux->prox;
 	}
 
 	if (elementoRep) {
-		free(novo);
 		cout << "Este elemento ja existe na lista, digite outro \n" << endl;
 	}
 	else {
-		if (primeiro == NULL)
-	{
-		primeiro = novo;
-	}
-	else if (novo->valor < primeiro->valor)
-	{
-		novo->prox = primeiro;
-		primeiro = novo;
-	}
-	else {
-		while (aux->prox != NULL && aux->prox->valor < novo->valor) {
-			aux = aux->prox;
+		if (primeiro == NULL) {
+			primeiro = novo;
 		}
-		novo->prox = aux->prox;
-		aux->prox = novo;
-	}
+		else if (primeiro->valor > novo->valor) {
+			novo->prox = primeiro;
+			primeiro = novo;
+		}
+		else if (aux->prox == NULL) {
+			aux->prox = novo;
+		}
+		else {
+			while (aux->prox != NULL && aux->prox->valor < novo->valor) {
+				aux = aux->prox;
+			}
+			novo->prox = aux->prox;
+			aux->prox = novo;
+		}
 	}
 	
 }
 
 void excluirElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia. \n";
+		return;
+	}
+	else {
+		int excluir;
+		cout << "Digite o elemento que quer excluir: ";
+		cin >> excluir;
 
+		NO* aux = primeiro;
+		NO* anterior = NULL;
+		while (aux != NULL && aux->valor <= excluir) {
+			if (aux->valor == excluir) {
+				break;
+			}
+			anterior = aux;
+			aux = aux->prox;
+		}
+		if (aux == NULL && aux->valor != excluir) {
+			cout << "O elemento nao esta na lista. \n";
+			return;
+		}
+		else if (aux == primeiro) {
+			primeiro = aux->prox;
+		}
+		else {
+			anterior->prox = aux->prox;
+		}
+		free(aux);
+		cout << "Elemento excluido! \n";
+	}
 }
 
 void buscarElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia. \n";
+		return;
+	}
+	else {
+		int procurador;
+		cout << "Digite o elemento que voce quer encontrar: ";
+		cin >> procurador;
 
+		NO* aux = primeiro;
+		while (aux != NULL && aux->valor <= procurador) {
+			if (aux->valor == procurador) {
+				cout << "O elemento esta na lista. \n";
+				return;
+			}
+			aux = aux->prox;
+		}
+		cout << "O elemento nao existe. \n";
+	}
 }
 
 
