@@ -178,7 +178,7 @@ void excluirElemento()
 			anterior = aux;
 			aux = aux->prox;
 		}
-		if (aux == NULL && aux->valor != excluir) {
+		if (aux == NULL || aux->valor != excluir) {
 			cout << "O elemento nao esta na lista. \n";
 			return;
 		}
