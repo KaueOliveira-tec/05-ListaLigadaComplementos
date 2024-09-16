@@ -134,6 +134,7 @@ void inserirElemento()
 		}
 		aux = aux->prox;
 	}
+	aux = primeiro;
 
 	if (elementoRep) {
 		cout << "Este elemento ja existe na lista, digite outro \n" << endl;
@@ -145,9 +146,6 @@ void inserirElemento()
 		else if (primeiro->valor > novo->valor) {
 			novo->prox = primeiro;
 			primeiro = novo;
-		}
-		else if (aux->prox == NULL) {
-			aux->prox = novo;
 		}
 		else {
 			while (aux->prox != NULL && aux->prox->valor < novo->valor) {
